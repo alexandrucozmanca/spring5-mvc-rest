@@ -1,4 +1,4 @@
-package guru.springfamework.domain;
+package alex.springfamework.domain;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package guru.springfamework.repositories;
+package alex.springfamework.repositories;
 
-import guru.springfamework.domain.Category;
+import alex.springfamework.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
