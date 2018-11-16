@@ -16,6 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     private CustomerMapper customerMapper;
     private CustomerRepository customerRepository;
+
     @Autowired
     public void setCustomerMapper(CustomerMapper customerMapper) {
         this.customerMapper = customerMapper;
@@ -51,11 +52,40 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer customer = customerMapper.customerDTOToCustomer(customerDTO);
 
+        return saveAndReturnDTO(customer);
+    }
+
+
+    @Override
+    public CustomerDTO saveCustomerByDTO(Long id, CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDTOToCustomer(customerDTO);
+        customer.setId(id);
+
+        return saveAndReturnDTO(customer);
+    }
+
+    @Override
+    public CustomerDTO patchCustomer(Long id, CustomerDTO customerDTO) {
+        return customerRepository.findById(id).map(customer -> {
+
+            if(customerDTO.getFirstName() != null){
+                customer.setFirstName(customerDTO.getFirstName());
+            }
+
+            if(customerDTO.getLastName() !=null){
+                customer.setLastName(customerDTO.getLastName());
+            }
+
+            return customerMapper.customerToCustomerDTO(customerRepository.save(customer));
+        }).orElseThrow(RuntimeException::new);
+    }
+
+    private CustomerDTO saveAndReturnDTO(Customer customer) {
         Customer savedCustomer = customerRepository.save(customer);
 
         CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
 
-        returnDto.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
+        returnDto.setCustomerUrl("/api/v1/customers/" + savedCustomer.getId());
 
         return returnDto;
     }
