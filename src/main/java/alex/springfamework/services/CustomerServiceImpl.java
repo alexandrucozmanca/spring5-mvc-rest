@@ -2,6 +2,7 @@ package alex.springfamework.services;
 
 import alex.springfamework.api.v1.mapper.CustomerMapper;
 import alex.springfamework.api.v1.model.CustomerDTO;
+import alex.springfamework.controllers.RestResponseEntityExceptionHandler;
 import alex.springfamework.controllers.v1.CategoryController;
 import alex.springfamework.controllers.v1.CustomerController;
 import alex.springfamework.domain.Customer;
@@ -46,7 +47,11 @@ public class CustomerServiceImpl implements CustomerService {
 
         return customerRepository.findById(id)
                 .map(customerMapper::customerToCustomerDTO)
-                .orElseThrow(RuntimeException::new);
+                .map(customerDTO -> {
+                    customerDTO.setCustomerUrl(getCustomerURL(id));
+                    return customerDTO;
+                })
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -82,7 +87,7 @@ public class CustomerServiceImpl implements CustomerService {
             returnDTO.setCustomerUrl(getCustomerURL(id));
 
             return returnDTO;
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override

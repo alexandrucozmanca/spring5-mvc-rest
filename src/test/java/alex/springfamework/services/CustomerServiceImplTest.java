@@ -108,7 +108,7 @@ public class CustomerServiceImplTest {
         Customer savedCustomer = new Customer();
         savedCustomer.setFirstName(customerDTO.getFirstName());
         savedCustomer.setLastName(customerDTO.getLastName());
-        savedCustomer.setId(1l);
+        savedCustomer.setId(1L);
 
         when(customerRepository.save(any(Customer.class))).thenReturn(savedCustomer);
 

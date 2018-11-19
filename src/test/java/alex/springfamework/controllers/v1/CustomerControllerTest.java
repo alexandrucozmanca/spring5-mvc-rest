@@ -1,8 +1,10 @@
 package alex.springfamework.controllers.v1;
 
 import alex.springfamework.api.v1.model.CustomerDTO;
+import alex.springfamework.controllers.RestResponseEntityExceptionHandler;
 import alex.springfamework.domain.Customer;
 import alex.springfamework.services.CustomerService;
+import alex.springfamework.services.ResourceNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -43,7 +45,8 @@ public class CustomerControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mockMvc = MockMvcBuilders.standaloneSetup(customerController)
-               .build();
+                .setControllerAdvice(new RestResponseEntityExceptionHandler())
+                .build();
     }
 
     @Test
@@ -83,6 +86,17 @@ public class CustomerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName",equalTo(FIRST_NAME)))
                 .andExpect(jsonPath("$.lastName",equalTo(LAST_NAME)));
+    }
+
+    @Test
+    public void testGetCustomerByIdNotFound() throws Exception{
+
+        when(customerService.getCustomerById(anyLong())).thenThrow(ResourceNotFoundException.class);
+
+        mockMvc.perform(get(CustomerController.BASE_URL + "222")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+
     }
 
     @Test
