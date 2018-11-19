@@ -2,8 +2,6 @@ package alex.springfamework.services;
 
 import alex.springfamework.api.v1.mapper.CategoryMapper;
 import alex.springfamework.api.v1.model.CategoryDTO;
-import alex.springfamework.controllers.v1.CategoryController;
-import alex.springfamework.domain.Category;
 import alex.springfamework.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 

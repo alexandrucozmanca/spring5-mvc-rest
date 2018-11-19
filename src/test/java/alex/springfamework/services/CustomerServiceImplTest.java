@@ -1,6 +1,5 @@
 package alex.springfamework.services;
 
-import alex.springfamework.api.v1.mapper.CategoryMapper;
 import alex.springfamework.api.v1.mapper.CustomerMapper;
 import alex.springfamework.api.v1.model.CustomerDTO;
 import alex.springfamework.controllers.v1.CustomerController;
@@ -15,12 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CustomerServiceImplTest {
 

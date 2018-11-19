@@ -1,6 +1,5 @@
 package alex.springfamework.repositories;
 
-import alex.springfamework.api.v1.model.CategoryDTO;
 import alex.springfamework.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 

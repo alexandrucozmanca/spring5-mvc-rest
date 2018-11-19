@@ -2,7 +2,6 @@ package alex.springfamework.controllers.v1;
 
 import alex.springfamework.api.v1.model.CustomerDTO;
 import alex.springfamework.controllers.RestResponseEntityExceptionHandler;
-import alex.springfamework.domain.Customer;
 import alex.springfamework.services.CustomerService;
 import alex.springfamework.services.ResourceNotFoundException;
 import org.junit.Before;
@@ -22,7 +21,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

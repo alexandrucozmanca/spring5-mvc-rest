@@ -1,6 +1,5 @@
 package alex.springfamework.api.v1.mapper;
 
-import alex.springfamework.api.v1.mapper.CategoryMapper;
 import alex.springfamework.api.v1.model.CategoryDTO;
 import alex.springfamework.domain.Category;
 import org.junit.Test;

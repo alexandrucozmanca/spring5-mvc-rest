@@ -2,8 +2,6 @@ package alex.springfamework.services;
 
 import alex.springfamework.api.v1.mapper.CustomerMapper;
 import alex.springfamework.api.v1.model.CustomerDTO;
-import alex.springfamework.controllers.RestResponseEntityExceptionHandler;
-import alex.springfamework.controllers.v1.CategoryController;
 import alex.springfamework.controllers.v1.CustomerController;
 import alex.springfamework.domain.Customer;
 import alex.springfamework.repositories.CustomerRepository;

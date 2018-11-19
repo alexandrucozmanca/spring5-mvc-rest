@@ -3,9 +3,7 @@ package alex.springfamework.controllers.v1;
 import alex.springfamework.api.v1.model.CategoryDTO;
 import alex.springfamework.api.v1.model.CategoryListDTO;
 import alex.springfamework.services.CategoryService;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

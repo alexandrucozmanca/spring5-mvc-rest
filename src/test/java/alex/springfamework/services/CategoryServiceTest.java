@@ -8,10 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.TestExecutionListeners;
 
-import javax.naming.Name;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
