@@ -20,10 +20,9 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -132,6 +131,31 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.firstName", equalTo(FIRST_NAME)))
                 .andExpect(jsonPath("$.lastName", equalTo(LAST_NAME)))
                 .andExpect(jsonPath("$.customer_url", equalTo("/api/v1/customers/1")));
+    }
+
+    @Test
+    public void patchCustomer() throws Exception{
+        // given
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstName(FIRST_NAME);
+
+        CustomerDTO returnDTO = new CustomerDTO();
+        returnDTO.setFirstName(customerDTO.getFirstName());
+        returnDTO.setLastName("UpdateLastName");
+        returnDTO.setCustomerUrl("/api/v1/customers/1");
+
+        when(customerService.patchCustomer(anyLong(), any(CustomerDTO.class))).thenReturn(returnDTO);
+
+        //when
+        mockMvc.perform(patch("/api/v1/customers/1")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(asJsonString(customerDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName", equalTo(FIRST_NAME)))
+                .andExpect(jsonPath("$.lastName", equalTo("UpdateLastName")))
+                .andExpect(jsonPath("$.customer_url", equalTo("/api/v1/customers/1")));
+
+
     }
 
 }
