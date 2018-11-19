@@ -100,7 +100,6 @@ public class CustomerControllerTest {
     @Test
     public void createNewCustomer() throws Exception{
         // given
-
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setFirstName(FIRST_NAME);
         customerDTO.setLastName(LAST_NAME);

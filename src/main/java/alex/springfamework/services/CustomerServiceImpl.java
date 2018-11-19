@@ -93,6 +93,10 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteById(id);
     }
 
+    private String getCustomerURL(Long id){
+        return CustomerController.BASE_URL + id;
+    }
+
     private CustomerDTO saveAndReturnDTO(Customer customer) {
         Customer savedCustomer = customerRepository.save(customer);
 
@@ -103,7 +107,5 @@ public class CustomerServiceImpl implements CustomerService {
         return returnDto;
     }
 
-    private String getCustomerURL(Long id){
-        return CustomerController.BASE_URL + id;
-    }
+
 }
