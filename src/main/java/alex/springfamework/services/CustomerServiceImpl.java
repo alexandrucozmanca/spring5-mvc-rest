@@ -2,6 +2,8 @@ package alex.springfamework.services;
 
 import alex.springfamework.api.v1.mapper.CustomerMapper;
 import alex.springfamework.api.v1.model.CustomerDTO;
+import alex.springfamework.controllers.v1.CategoryController;
+import alex.springfamework.controllers.v1.CustomerController;
 import alex.springfamework.domain.Customer;
 import alex.springfamework.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .stream()
                 .map(customer -> {
                    CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
-                   customerDTO.setCustomerUrl("/api/v1/customers/" + customer.getId());
+                   customerDTO.setCustomerUrl(getCustomerURL(customer.getId()));
                    return customerDTO;
                 })
                 .collect(Collectors.toList());
@@ -77,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
             }
 
             CustomerDTO returnDTO = customerMapper.customerToCustomerDTO(customerRepository.save(customer));
-            returnDTO.setCustomerUrl("/api/v1/customers/" + id);
+            returnDTO.setCustomerUrl(getCustomerURL(id));
 
             return returnDTO;
         }).orElseThrow(RuntimeException::new);
@@ -93,8 +95,12 @@ public class CustomerServiceImpl implements CustomerService {
 
         CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
 
-        returnDto.setCustomerUrl("/api/v1/customers/" + savedCustomer.getId());
+        returnDto.setCustomerUrl(getCustomerURL(savedCustomer.getId()));
 
         return returnDto;
+    }
+
+    private String getCustomerURL(Long id){
+        return CustomerController.BASE_URL + id;
     }
 }

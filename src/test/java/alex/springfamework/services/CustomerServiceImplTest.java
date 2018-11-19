@@ -3,6 +3,7 @@ package alex.springfamework.services;
 import alex.springfamework.api.v1.mapper.CategoryMapper;
 import alex.springfamework.api.v1.mapper.CustomerMapper;
 import alex.springfamework.api.v1.model.CustomerDTO;
+import alex.springfamework.controllers.v1.CustomerController;
 import alex.springfamework.domain.Customer;
 import alex.springfamework.repositories.CustomerRepository;
 import org.junit.Before;
@@ -93,7 +94,7 @@ public class CustomerServiceImplTest {
         // then
         assertEquals(FIRST_NAME, savedDTO.getFirstName());
         assertEquals(LAST_NAME, savedDTO.getLastName());
-        assertEquals("/api/v1/customers/1", savedDTO.getCustomerUrl());
+        assertEquals(CustomerController.BASE_URL + "1", savedDTO.getCustomerUrl());
     }
 
     @Test
@@ -116,7 +117,7 @@ public class CustomerServiceImplTest {
 
         // then
         assertEquals(customerDTO.getFirstName(), savedDTO.getFirstName());
-        assertEquals("/api/v1/customers/1", savedDTO.getCustomerUrl());
+        assertEquals(CustomerController.BASE_URL + "1", savedDTO.getCustomerUrl());
 
     }
 
