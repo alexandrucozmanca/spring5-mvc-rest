@@ -2,6 +2,7 @@ package alex.springfamework.services;
 
 import alex.springfamework.api.v1.mapper.VendorMapper;
 import alex.springfamework.api.v1.model.VendorDTO;
+import alex.springfamework.api.v1.model.VendorListDTO;
 import alex.springfamework.controllers.v1.VendorController;
 import alex.springfamework.domain.Vendor;
 import alex.springfamework.repositories.VendorRepository;
@@ -24,8 +25,9 @@ public class VendorServiceImpl implements VendorService {
     }
 
     @Override
-    public List<VendorDTO> getAllVendors() {
-        return vendorRepository
+    public VendorListDTO getAllVendors() {
+
+       List<VendorDTO> vendors  = vendorRepository
                 .findAll()
                 .stream()
                 .map(vendor -> {
@@ -34,6 +36,8 @@ public class VendorServiceImpl implements VendorService {
                     return vendorDTO;
                 })
                 .collect(Collectors.toList());
+
+        return new VendorListDTO(vendors);
     }
 
     @Override
@@ -66,6 +70,19 @@ public class VendorServiceImpl implements VendorService {
         vendor.setId(id);
 
         return saveAndReturnDTO(vendor);
+    }
+
+    @Override
+    public VendorDTO patchVendor(Long id, VendorDTO vendorDTO){
+        return vendorRepository.findById(id)
+                .map(vendor -> {
+
+                    if (vendorDTO.getName() != null){
+                        vendor.setName(vendorDTO.getName());
+                    }
+
+                    return saveAndReturnDTO(vendor);
+                }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override

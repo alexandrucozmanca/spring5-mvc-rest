@@ -6,6 +6,8 @@ import alex.springfamework.services.VendorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Past;
+
 @RestController
 @RequestMapping(VendorController.BASE_URL)
 public class VendorController {
@@ -21,7 +23,7 @@ public class VendorController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public VendorListDTO getListOfVendors(){
-        return new VendorListDTO(vendorService.getAllVendors());
+        return vendorService.getAllVendors();
     }
 
     @GetMapping({"/{id}"})
@@ -44,6 +46,13 @@ public class VendorController {
     public VendorDTO updateVendorByDTO(@PathVariable Long id,@RequestBody VendorDTO vendorDTO){
         return vendorService.saveVendorByDTO(id, vendorDTO);
     }
+
+    @PatchMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.OK)
+    public VendorDTO patchVendor(@PathVariable Long id, @RequestBody VendorDTO vendorDTO){
+        return vendorService.patchVendor(id, vendorDTO);
+    }
+
 
     @DeleteMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)

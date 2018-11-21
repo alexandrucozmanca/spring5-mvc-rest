@@ -1,6 +1,7 @@
 package alex.springfamework.controllers.v1;
 
 import alex.springfamework.api.v1.model.VendorDTO;
+import alex.springfamework.api.v1.model.VendorListDTO;
 import alex.springfamework.controllers.RestResponseEntityExceptionHandler;
 import alex.springfamework.domain.Vendor;
 import alex.springfamework.services.ResourceNotFoundException;
@@ -59,7 +60,7 @@ public class VendorControllerTest {
 
         VendorDTO vendor2 = new VendorDTO();
 
-        List<VendorDTO> vendors = Arrays.asList(vendor1, vendor2);
+       VendorListDTO vendors = new VendorListDTO(Arrays.asList(vendor1, vendor2));
 
         when(vendorService.getAllVendors()).thenReturn(vendors);
 

@@ -6,6 +6,7 @@ import alex.springfamework.bootstrap.Bootstrap;
 import alex.springfamework.domain.Customer;
 import alex.springfamework.repositories.CategoryRepository;
 import alex.springfamework.repositories.CustomerRepository;
+import alex.springfamework.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,9 @@ public class CustomerServiceImplIT {
     @Autowired
     CustomerRepository customerRepository;
 
+    @Autowired
+    VendorRepository vendorRepository;
+
     CustomerServiceImpl customerService;
 
     @Before
@@ -37,7 +41,7 @@ public class CustomerServiceImplIT {
         System.out.println(customerRepository.findAll().size());
 
         //setup data
-        Bootstrap bootstrap = new Bootstrap(categoryRepository, customerRepository);
+        Bootstrap bootstrap = new Bootstrap(categoryRepository, customerRepository, vendorRepository);
         bootstrap.run();
 
         customerService = new CustomerServiceImpl();
