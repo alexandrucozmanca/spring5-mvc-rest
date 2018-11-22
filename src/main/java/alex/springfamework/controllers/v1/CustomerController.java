@@ -3,10 +3,12 @@ package alex.springfamework.controllers.v1;
 import alex.springfamework.api.v1.model.CustomerDTO;
 import alex.springfamework.api.v1.model.CustomerListDTO;
 import alex.springfamework.services.CustomerService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-
+@Api(description = "My Customer Controller")
 @RestController
 @RequestMapping(CustomerController.BASE_URL)
 public class CustomerController {
@@ -19,6 +21,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @ApiOperation(value = "This will give a list of customers", notes = "These are notes about the API.")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public CustomerListDTO getListofCustomers(){
