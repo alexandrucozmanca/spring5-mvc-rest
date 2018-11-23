@@ -11,7 +11,7 @@ import Spring5MvcRestApplication.services.CategoryService;
 @RequestMapping(CategoryController.BASE_URL)
 public class  CategoryController {
 
-    public static final String BASE_URL = "/api/Spring5MvcRestApplication.v1/categories";
+    public static final String BASE_URL = "/api/v1/categories";
 
     private final CategoryService categoryService;
 

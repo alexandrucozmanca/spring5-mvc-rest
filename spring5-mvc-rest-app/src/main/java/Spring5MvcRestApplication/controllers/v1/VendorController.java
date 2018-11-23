@@ -13,7 +13,7 @@ import Spring5MvcRestApplication.services.VendorService;
 @RequestMapping(VendorController.BASE_URL)
 public class VendorController {
 
-    public static final String BASE_URL = "/api/Spring5MvcRestApplication.v1/vendors/";
+    public static final String BASE_URL = "/api/v1/vendors/";
 
     private final VendorService vendorService;
 

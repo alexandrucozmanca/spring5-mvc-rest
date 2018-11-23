@@ -16,7 +16,7 @@ import Spring5MvcRestApplication.services.CustomerService;
 @RequestMapping(CustomerController.BASE_URL)
 public class CustomerController {
 
-    public static final String BASE_URL = "/api/Spring5MvcRestApplication.v1/customers/";
+    public static final String BASE_URL = "/api/v1/customers/";
 
     private final CustomerService customerService;
 
